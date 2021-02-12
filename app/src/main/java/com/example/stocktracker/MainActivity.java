@@ -22,7 +22,7 @@ import okhttp3.Headers;
 public class MainActivity extends AppCompatActivity {
 
     public static final String API_KEY="33cdc7309b0460999d3a877ee475b2d8";
-    public String myStocks = "AAPL,FB,GOOG,T,NOK,PLTR,TWTR,BAC,AMD";
+    public String myStocks = "AAPL,FB,GOOG,T,NOK,PLTR,TWTR,BAC,AMD,K";
     String url = "https://financialmodelingprep.com/api/v3/quote/" + myStocks +  "?apikey=" + API_KEY;
 
     List<Stock> stocks;
