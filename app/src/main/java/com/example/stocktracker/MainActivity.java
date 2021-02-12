@@ -1,6 +1,8 @@
 package com.example.stocktracker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.util.Log;
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.codepath.asynchttpclient.callback.TextHttpResponseHandler;
+import com.example.stocktracker.StockAdapter.StockAdapter;
 import com.example.stocktracker.models.Stock;
 
 import org.json.JSONException;
@@ -22,7 +25,7 @@ import okhttp3.Headers;
 public class MainActivity extends AppCompatActivity {
 
     public static final String API_KEY="33cdc7309b0460999d3a877ee475b2d8";
-    public String stocks = "AAPL,FB,GOOG";
+    public String stocks = "AAPL,FB,GOOG,T,NOK,PLTR,TWTR,BAC,AMD";
 
     List<Stock> stockQuotes;
 
@@ -32,6 +35,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         stockQuotes = new ArrayList<>();
+
+        // Adapter Setup
+        RecyclerView rvStocks = findViewById(R.id.rvStocks);
+        // create the adapter
+        StockAdapter adapter = new StockAdapter(this, stockQuotes);
+
+        // set the adpater on recyclerview
+        rvStocks.setAdapter(adapter);
+
+        // set a layout manager on the adapter
+        rvStocks.setLayoutManager(new LinearLayoutManager(this));
 
         // https://github.com/codepath/CPAsyncHttpClient
 
@@ -45,9 +59,10 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     stockQuotes.addAll(Stock.fromJSonArray(json.jsonArray));
                     Log.d("MainActivity", "Stocks: " + Stock.listToString(stockQuotes));
+                    adapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.e("MainAvtivity", "Hit Json exception", e);
                 }
             }
 

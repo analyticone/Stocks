@@ -33,6 +33,22 @@ public class Stock {
                 '}';
     }
 
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public double getChange() {
+        return change;
+    }
+
     public static String listToString(List<Stock> stocks)
     {
         String result = "\n";
