@@ -33,6 +33,14 @@ public class Stock {
                 '}';
     }
 
+    public static String listToString(List<Stock> stocks)
+    {
+        String result = "\n";
+        for (Stock s : stocks)
+            result += s.toString() +"\n";
+        return result;
+    }
+
     public static List<Stock> fromJSonArray(JSONArray jsonArray) throws JSONException {
         List<Stock> stocks = new ArrayList<>();
 

@@ -41,17 +41,14 @@ public class MainActivity extends AppCompatActivity {
         client.get(url, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
-
-
                 Log.i("MainActivity", json.toString());
                 try {
                     stockQuotes.addAll(Stock.fromJSonArray(json.jsonArray));
-                    Log.d("MainActivity", "Stocks: " + stockQuotes.size());
+                    Log.d("MainActivity", "Stocks: " + Stock.listToString(stockQuotes));
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
 
             @Override
